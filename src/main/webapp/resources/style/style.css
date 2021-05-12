@@ -1,0 +1,119 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : May 7, 2021, 12:13:37 AM
+    Author     : Bryan
+*/
+
+body {
+  background: url('../images/hotel-nagano-background.jpg') no-repeat center;
+  background-size: cover;
+  background-attachment: fixed;
+  text-align: center;
+}
+
+#reservation_customer_information table {
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid #000000;
+    color: white;
+}
+
+#reservation_customer_information th {
+    background: rgba(0, 0, 0, 0.6);
+    border: 1px solid #000000;
+    padding: 8px;
+}
+
+#reservation_customer_information td {
+    border: 1px solid #000000;
+    padding: 8px;
+}
+
+#reservation_rooms_information table {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid #000000;
+    color: white;
+}
+
+#reservation_rooms_information tr {
+    height:30px;
+}
+
+#reservation_rooms_information th {
+    background: rgba(0, 0, 0, 0.5);
+    padding: 16px 8px 16px 8px;
+    border: 1px solid #000000;
+}
+
+#reservation_rooms_information td {
+    padding: 8px;
+}
+
+.custom_container {
+    color: white;
+    background-color: rgba(0,0,0,0.5);
+    border-radius: 20px;
+    display: inline-block;
+    transition: all 0.5s;
+    overflow: hidden;
+}
+
+.container img {
+    width: 100%;
+}
+
+input, select, textarea{
+    color: white !important;
+    background-color: rgba(0,0,0,0.5) !important;
+}
+
+.submit-button {
+  background-color: rgba(0,0,0,0.5);
+  border-radius: 10px;
+  font-weight: bold;
+  padding: 5px 10px 5px 10px;
+  color: white;
+  cursor: pointer;
+}
+
+.book-button {
+  background-color: rgba(0,0,0,0.1);
+  border-radius: 2px;
+  padding: 30px 30px 30px 30px;
+  color: white;
+  cursor: pointer;
+}
+
+h1, h2, h3 {
+  color: white;
+  font-style: oblique;
+  font-family: Monotype Corsiva;
+  font-weight: lighter;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+
+nav{
+  display: flex;
+  width: 100%;
+  height: 20%;
+  background: black;
+  align-items: center;
+  justify-content: center;
+}
+
+nav a {
+    text-decoration: none;
+    color: #999;
+    margin: 0 40px;
+}
+
+.selection-scale {
+    
+}
+
+.selection-scale:hover {
+    transform: scale(1.1);
+}
