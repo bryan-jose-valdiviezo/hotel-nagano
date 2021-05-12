@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+                http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+                http://www.springframework.org/schema/mvc
+                http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
+    
+    <mvc:annotation-driven />
+    
+    <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+        <property name="prefix" value="/WEB-INF/jsp/" />
+        <property name="suffix" value=".jsp" />
+    </bean>
+    
+    <bean name="viewServices" class="com.hnagano.services.ViewServices">
+        <property name="dao" ref="viewDAO" />
+    </bean>
+    
+    <bean name="suiteServices" class="com.hnagano.services.SuiteServices">
+        <property name="dao" ref="suiteDAO" />
+    </bean>
+    
+    <bean name="roomServices" class="com.hnagano.services.RoomServices">
+        <property name="dao" ref="roomDAO" />
+    </bean>
+    
+    <bean name="datePricesServices" class="com.hnagano.services.DatePriceServices">
+        <property name="dao" ref="datePriceDAO" />
+    </bean>
+    
+    <bean name="reservationServices" class="com.hnagano.services.ReservationServices">
+        <property name="dao" ref="reservationDAO" />
+    </bean>
+
+    <bean name="indexController" class="com.hnagano.controllers.IndexController">
+        
+    </bean>
+    
+    <bean name="roomsController" class="com.hnagano.controllers.RoomsController">
+        <property name="viewServices" ref="viewServices" />
+        <property name="suiteServices" ref="suiteServices" />
+        <property name="roomServices" ref="roomServices" />
+    </bean>
+    
+    <bean name="reservationsController" class="com.hnagano.controllers.ReservationsController">
+        <property name="reservationServices" ref="reservationServices" />
+        <property name="datePricesServices" ref="datePricesServices" />
+    </bean>
+
+</beans>

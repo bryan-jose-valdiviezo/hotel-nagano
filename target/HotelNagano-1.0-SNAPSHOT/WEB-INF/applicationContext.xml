@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+                http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+                http://www.springframework.org/schema/mvc
+                http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
+    
+    <mvc:resources mapping="/resources/**" location="/resources/"/>
+    <mvc:annotation-driven />
+    
+    <bean id="database" class="com.hnagano.databases.Database">
+    </bean>
+    
+    <bean id="seasonDAO" class="com.hnagano.daos.SeasonDAO">
+        <property name="database" ref="database"/>
+    </bean>
+    
+    <bean id="dayDAO" class="com.hnagano.daos.DayDAO">
+        <property name="database" ref="database"/>
+    </bean>
+    
+    <bean id="viewDAO" class="com.hnagano.daos.ViewDAO">
+        <property name="database" ref="database"/>
+    </bean>
+    
+    <bean id="suiteDAO" class="com.hnagano.daos.SuiteDAO">
+        <property name="database" ref="database"/>
+    </bean>
+    
+    <bean id="datePriceDAO" class="com.hnagano.daos.DatePriceDAO">
+        <property name="database" ref="database"/>
+        <property name="suiteDAO" ref="suiteDAO"/>
+        <property name="viewDAO" ref="viewDAO"/>
+        <property name="dayDAO" ref="dayDAO"/>
+        <property name="seasonDAO" ref="seasonDAO"/>
+    </bean>
+    
+    <bean id="roomDAO" class="com.hnagano.daos.RoomDAO">
+        <property name="database" ref="database"/>
+        <property name="suiteDAO" ref="suiteDAO"/>
+        <property name="viewDAO" ref="viewDAO"/>
+        <property name="datePriceDAO" ref="datePriceDAO"/>
+    </bean>
+    
+    <bean id="reservationDAO" class="com.hnagano.daos.ReservationDAO">
+        <property name="database" ref="database" />
+        <property name="roomDAO" ref="roomDAO" />
+    </bean>
+
+</beans>
