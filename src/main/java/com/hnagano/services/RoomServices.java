@@ -30,4 +30,12 @@ public class RoomServices {
     public ArrayList<Room> getAvailableRoomsForFilter(RoomSearchDTO filter){
         return dao.findAllAvailableRoomsByFilter(filter);
     }
+    
+    public int getTodayAvailableRooms() {
+        return dao.findNumberAvailableRoomToday();
+    }
+    
+    public List<Room> findAllRooms() {
+        return dao.findAll();
+    }
 }

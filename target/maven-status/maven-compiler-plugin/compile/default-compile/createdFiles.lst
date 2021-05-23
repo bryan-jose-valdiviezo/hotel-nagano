@@ -1,7 +1,9 @@
 com\hnagano\daos\RoomDAO.class
 com\hnagano\daos\UserDAO.class
+com\hnagano\dtos\ViewPriceDTO.class
 com\hnagano\modules\JsonWriter.class
 com\hnagano\services\RoomServices.class
+com\hnagano\services\SeasonServices.class
 com\hnagano\services\SuiteServices.class
 com\hnagano\daos\DatePriceDAO.class
 com\hnagano\models\Day.class
@@ -13,6 +15,7 @@ com\hnagano\models\Room.class
 com\hnagano\controllers\ReservationsController.class
 com\hnagano\daos\DAO.class
 com\hnagano\dtos\RoomSearchDTO.class
+com\hnagano\controllers\AdminPricesController.class
 com\hnagano\models\ViewPrice.class
 com\hnagano\databases\Database.class
 com\hnagano\models\Suite.class
@@ -30,6 +33,8 @@ com\hnagano\daos\SeasonDAO.class
 com\hnagano\daos\CartDAO.class
 com\hnagano\daos\DayDAO.class
 com\hnagano\models\SuitePrice.class
+com\hnagano\controllers\AdminIndexController.class
 com\hnagano\services\ViewServices.class
+com\hnagano\services\DayServices.class
 com\hnagano\models\Cart.class
 com\hnagano\dtos\ReservationDTO.class

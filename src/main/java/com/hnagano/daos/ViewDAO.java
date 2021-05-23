@@ -98,6 +98,30 @@ public class ViewDAO implements DAO<View>{
         
         return viewPrices;
     }
+    
+    public List<ViewPrice> findAllUpcomingViewAndPrices() {
+        List<ViewPrice> viewPrices = new LinkedList<ViewPrice>();
+        ViewPrice viewPrice;
+        
+        try {
+            PreparedStatement stm = database.getInstance().prepareStatement("SELECT views.id, view_type, start_at, price FROM views "+
+                    "INNER JOIN view_prices ON views.id = view_prices.view_id "+
+                    "ORDER BY start_at DESC");
+            ResultSet res = stm.executeQuery();
+            
+            while (res.next()) {
+                viewPrice = new ViewPrice(objectBuilder(res));
+                viewPrice.setDateStart(res.getDate("start_at").toLocalDate());
+                viewPrice.setPrice(res.getDouble("price"));
+                viewPrices.add(viewPrice);
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(ViewDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return viewPrices;
+    }
 
     @Override
     public View find(int id) {

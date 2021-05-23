@@ -80,6 +80,31 @@ public class SuiteDAO implements DAO<Suite>{
         
         return suitePrices;
     }
+    
+    public List<SuitePrice> findAllUpcomingSuiteAndPrices() {
+        List<SuitePrice> suitePrices = new LinkedList<SuitePrice>();
+        SuitePrice suitePrice;
+        
+        try {
+            PreparedStatement stm = database.getInstance().prepareStatement("SELECT suite.id, suite_type, start_at, price FROM suite "+
+                    "INNER JOIN suite_prices ON suite.id = suite_prices.suite_id "+
+                    "ORDER BY start_at DESC;");
+            
+            ResultSet res = stm.executeQuery();
+            
+            while (res.next()) {
+                suitePrice = new SuitePrice(objectBuilder(res));
+                suitePrice.setPrice(res.getDouble("price"));
+                suitePrice.setDateStart(res.getDate("start_at").toLocalDate());
+                suitePrices.add(suitePrice);
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(ViewDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return suitePrices;
+    }
 
     @Override
     public List<Suite> findAll() {

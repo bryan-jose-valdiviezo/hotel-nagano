@@ -34,6 +34,14 @@
     <bean name="reservationServices" class="com.hnagano.services.ReservationServices">
         <property name="dao" ref="reservationDAO" />
     </bean>
+    
+    <bean name="dayServices" class="com.hnagano.services.DayServices">
+        <property name="dao" ref="dayDAO" />
+    </bean>
+    
+    <bean name="seasonServices" class="com.hnagano.services.SeasonServices">
+        <property name="dao" ref="seasonDAO" />
+    </bean>
 
     <bean name="indexController" class="com.hnagano.controllers.IndexController">
         
@@ -48,6 +56,18 @@
     <bean name="reservationsController" class="com.hnagano.controllers.ReservationsController">
         <property name="reservationServices" ref="reservationServices" />
         <property name="datePricesServices" ref="datePricesServices" />
+    </bean>
+    
+    <bean name="adminIndexController" class="com.hnagano.controllers.AdminIndexController">
+        <property name="reservationServices" ref="reservationServices" />
+        <property name="roomServices" ref="roomServices" />
+    </bean>
+    
+    <bean name="adminPricesController" class="com.hnagano.controllers.AdminPricesController">
+        <property name="viewServices" ref="viewServices" />
+        <property name="suiteServices" ref="suiteServices" />
+        <property name="dayServices" ref="dayServices" />
+        <property name="seasonServices" ref="seasonServices" />
     </bean>
 
 </beans>

@@ -117,3 +117,23 @@ nav a {
 .selection-scale:hover {
     transform: scale(1.1);
 }
+
+.modal-content {
+  background-color: rgba(102,102,102,0.4);
+}
+
+.modal-title {
+    color:white;
+}
+
+.modal-body {
+    color:white;
+    position: relative;
+    overflow-y: auto;
+    max-height: 400px;
+    padding: 15px;
+}
+
+.modal-backdrop.show {
+    opacity: .8;
+}

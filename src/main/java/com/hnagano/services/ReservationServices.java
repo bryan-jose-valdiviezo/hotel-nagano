@@ -7,6 +7,7 @@ package com.hnagano.services;
 
 import com.hnagano.daos.ReservationDAO;
 import com.hnagano.models.Reservation;
+import java.util.ArrayList;
 
 /**
  *
@@ -25,5 +26,16 @@ public class ReservationServices {
     
     public int createReservation(Reservation reservation) {
         return dao.createReservationWithReturn(reservation);
+    }
+    
+    public double findTodayIncome() {
+        double income = 0.0;
+        ArrayList<Reservation> reservations = dao.findAllMadeToday();
+        
+        for (Reservation reservation : reservations) {
+            income += reservation.totalPrice();
+        }
+        
+        return income;
     }
 }

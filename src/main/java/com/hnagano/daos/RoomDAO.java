@@ -81,6 +81,32 @@ public class RoomDAO implements DAO<Room>{
         return rooms;
     }
     
+    public int findNumberAvailableRoomToday() {
+        int availableRoomsCount = 0;
+        
+        try {
+            String query = "SELECT rooms.* FROM rooms "
+                    + "INNER JOIN reservation_rooms ON rooms.id = reservation_rooms.room_id "
+                    + "INNER JOIN reservations ON reservations.id = reservation_rooms.reservation_id "
+                    + "WHERE rooms.id NOT IN ("
+                    + "SELECT rooms.id FROM rooms "
+                    + "INNER JOIN reservation_rooms ON rooms.id = reservation_rooms.room_id "
+                    + "INNER JOIN reservations ON reservations.id = reservation_rooms.reservation_id "
+                    + "WHERE (CURRENT_DATE <= date_end AND CURRENT_DATE >= date_start)"
+                    + ") GROUP BY rooms.id";
+            PreparedStatement stm = database.getInstance().prepareStatement(query);
+            
+            ResultSet res = stm.executeQuery();
+            
+            while (res.next())
+                availableRoomsCount++;
+        } catch (SQLException ex) {
+            Logger.getLogger(RoomDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return availableRoomsCount;
+    }
+    
     public ArrayList<Room> findAllAvailableRoomsByFilter(RoomSearchDTO filter) {
         ArrayList<Room> allRooms = new ArrayList<Room>();
         Room room;

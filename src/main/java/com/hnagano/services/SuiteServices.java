@@ -7,6 +7,9 @@ package com.hnagano.services;
 
 import com.hnagano.daos.SuiteDAO;
 import com.hnagano.models.Suite;
+import com.hnagano.models.SuitePrice;
+import java.time.LocalDate;
+import java.util.LinkedList;
 import java.util.List;
 /**
  *
@@ -21,5 +24,24 @@ public class SuiteServices {
     
     public List<Suite> getAllSuites(){
         return dao.findAll();
+    }
+    
+    public List<SuitePrice> findAllCurrentSuitesAndPrices() {
+        List<Suite> suites = getAllSuites();
+        List<SuitePrice> suitePrices = new LinkedList<SuitePrice>();
+        
+        for (Suite suite : suites) {
+            suitePrices.add(dao.findLatestPriceByDate(LocalDate.now(), suite.getId()));
+        }
+        
+        return suitePrices;
+    }
+    
+    public List<SuitePrice> findAllUpcomingSuitesAndPrices() {
+        return dao.findAllUpcomingSuiteAndPrices();
+    }
+    
+    public boolean createSuitePrice(SuitePrice suitePrice) {
+        return dao.createSuitePrice(suitePrice);
     }
 }

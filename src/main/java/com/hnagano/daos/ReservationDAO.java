@@ -13,6 +13,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Level;
@@ -107,6 +109,26 @@ public class ReservationDAO implements DAO<Reservation>{
         
         return reservation;
     }
+    
+    public ArrayList<Reservation> findAllMadeToday() {
+        ArrayList<Reservation> reservations = new ArrayList<Reservation>();
+        Reservation reservation;
+        try {
+            PreparedStatement stm = database.getInstance().prepareStatement("SELECT * FROM reservations WHERE creation_date = CURRENT_DATE");
+            ResultSet res = stm.executeQuery();
+            
+            if (res.next()) {
+                reservation = objectBuilder(res);
+                reservation.setRooms(roomDAO.findAllForReservation(reservation, true));
+                reservations.add(reservation);
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(ReservationDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return reservations;
+    }
 
     @Override
     public boolean create(Reservation reservation) {
@@ -142,16 +164,17 @@ public class ReservationDAO implements DAO<Reservation>{
     
     public int createReservationWithReturn(Reservation reservation) {
         try {
-            PreparedStatement stm = database.getInstance().prepareStatement("INSERT INTO reservations (customer_count, date_start, date_end, special_instructions, email, name, phone) "
-                    + "VALUES (?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement stm = database.getInstance().prepareStatement("INSERT INTO reservations (customer_count, date_start, date_end, creation_date, special_instructions, email, name, phone) "
+                    + "VALUES (?,?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
             
             stm.setInt(1, reservation.getCustomerCount());
             stm.setDate(2, Date.valueOf(reservation.getDateStart()));
             stm.setDate(3, Date.valueOf(reservation.getDateEnd()));
-            stm.setString(4, reservation.getSpecialInstructions());
-            stm.setString(5, reservation.getEmail());
-            stm.setString(6, reservation.getName());
-            stm.setInt(7, reservation.getPhone());
+            stm.setDate(4, Date.valueOf(LocalDate.now()));
+            stm.setString(5, reservation.getSpecialInstructions());
+            stm.setString(6, reservation.getEmail());
+            stm.setString(7, reservation.getName());
+            stm.setInt(8, reservation.getPhone());
             
             int n = stm.executeUpdate();
             
@@ -219,6 +242,7 @@ public class ReservationDAO implements DAO<Reservation>{
             reservation.setCustomerCount(res.getInt("customer_count"));
             reservation.setDateStart(res.getDate("date_start").toLocalDate());
             reservation.setDateEnd(res.getDate("date_end").toLocalDate());
+            reservation.setCreationDate(res.getDate("creation_date").toLocalDate());
             reservation.setSpecialInstructions(res.getString("special_instructions"));
             reservation.setEmail(res.getString("email"));
             reservation.setName(res.getString("name"));
