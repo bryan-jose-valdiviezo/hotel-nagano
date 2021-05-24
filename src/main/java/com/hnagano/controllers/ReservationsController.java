@@ -10,6 +10,7 @@ import com.hnagano.dtos.ReservationDTO;
 import com.hnagano.models.Cart;
 import com.hnagano.models.Reservation;
 import com.hnagano.models.Room;
+import com.hnagano.models.User;
 import com.hnagano.modules.JsonWriter;
 import com.hnagano.services.DatePriceServices;
 import com.hnagano.services.ReservationServices;
@@ -43,7 +44,15 @@ public class ReservationsController {
     @RequestMapping(value="/new", method = RequestMethod.GET)
     public String newReservation(ModelMap model, HttpSession session) {
         Cart cart = (Cart) session.getAttribute("cart");
+        User user = (User) session.getAttribute("user");
         ReservationDTO form = new ReservationDTO();
+        
+        if (user != null) {
+            form.setName(user.getName());
+            form.setPhone(user.getPhone());
+            form.setEmail(user.getEmail());
+            form.setAddress(user.getAddress());
+        }
         
         if (cart != null && cart.getDateStart() != null) {
             for (Room room : cart.getRooms()) {

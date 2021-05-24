@@ -76,7 +76,7 @@ public class UserDAO {
                     user.setPhone(res.getInt("phone"));
                     user.setEmail(res.getString("email"));
                     user.setAddress(res.getString("address"));
-                    user.setRole(res.getString("role_id"));
+                    user.setRole(res.getString("role"));
                     user.setUsername(res.getString("username"));
                     user.setPassword(res.getString("password"));
                 }

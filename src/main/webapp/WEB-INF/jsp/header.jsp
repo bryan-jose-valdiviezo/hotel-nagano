@@ -21,7 +21,7 @@
         if(session.getAttribute("user") == null)
         {
     %>
-    <a href="/HotelNagano/login/loginPage">Sign in</a>
+    <a href="/HotelNagano/login/loginPage/">Sign in</a>
     <%
         }
     %>
