@@ -22,4 +22,8 @@ public class UserServices {
 
     }
 
+    public void createUser(String name, String email, int phone, String address, String username, String password){
+        dao.createUser(name, email, phone, address, username, password);
+    }
+
 }

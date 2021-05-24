@@ -21,9 +21,9 @@ public class LoginController {
         this.userServices = userServices;
     }
 
-    @RequestMapping(value="/loginPage",method=RequestMethod.GET)
+    @RequestMapping(value = "/loginPage", method = RequestMethod.GET)
     public String login(HttpSession session, ModelMap model) {
-        if (session.getAttribute("user")!=null) {
+        if (session.getAttribute("user") != null) {
             return "redirect:/";
         }
         model.addAttribute("modele", new User());
@@ -54,11 +54,32 @@ public class LoginController {
         return "redirect:/";
     }
 
-    @RequestMapping(value="/logoutPage")
+    @RequestMapping(value = "/logoutPage", method = RequestMethod.GET)
+    public String logout(HttpSession session, User user, ModelMap model) {
+        model.addAttribute("modele", user);
+        return "login/logoutPage";
+    }
+
+    @PostMapping(value = "/logoutPage")
     public String doLogout(HttpSession session, ModelMap model) {
-        session.removeAttribute("user");
+        session.invalidate();
         model.addAttribute("modele", new User());
         return "redirect:/";
+    }
+
+    @RequestMapping(value = "/createPage", method = RequestMethod.GET)
+    public String create(HttpSession session,ModelMap model) {
+        model.addAttribute("modele", new User());
+        return "login/createPage";
+    }
+
+    @PostMapping(value = "/createPage")
+    public String doCreate(HttpSession session, User user, ModelMap model){
+        System.out.println(user.getName());
+        System.out.print(user.getEmail());
+        userServices.createUser(user.getName(), user.getEmail(), user.getPhone(), user.getAddress(), user.getUsername(), user.getPassword());
+
+        return "redirect:/login/loginPage/";
     }
 
 }
