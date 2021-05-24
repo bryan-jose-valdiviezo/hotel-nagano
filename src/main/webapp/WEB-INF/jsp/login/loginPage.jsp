@@ -35,7 +35,7 @@
                             </div>
                         </div>
                     </f:form>
-                    Vous n'avez pas de compte ? <a href='/createPage'>Inscrivez-vous</a>
+                    Vous n'avez pas de compte ? <a href='/HotelNagano/login/createPage'>Inscrivez-vous</a>
                 </div>
             </div>
         </div>
