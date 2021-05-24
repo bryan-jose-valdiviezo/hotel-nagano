@@ -6,7 +6,10 @@
 package com.hnagano.services;
 
 import com.hnagano.daos.ReservationDAO;
+import com.hnagano.dtos.ReservationSearchDTO;
 import com.hnagano.models.Reservation;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -19,11 +22,46 @@ public class ReservationServices {
         this.dao = dao;
     }
     
+    public List<Reservation> findAll() {
+        return dao.findAll();
+    }
+    
+    public ArrayList<Reservation> findAllByEmail(String email) {
+        return dao.findAllByEmail(email);
+    }
+    
+    public Reservation findByIdAndEmail(int id, String email) {
+        return dao.findByIdAndEmail(id, email);
+    }
+    
+    public ArrayList<Reservation> findAllByFilter(ReservationSearchDTO form) {
+        return dao.findAllByFilter(form);
+    }
+    
     public Reservation findReservation(int id) {
         return dao.findWithRooms(id, true);
     }
     
     public int createReservation(Reservation reservation) {
         return dao.createReservationWithReturn(reservation);
+    }
+    
+    public boolean updateReservation(Reservation reservation) {
+        return dao.update(reservation);
+    }
+    
+    public double findTodayIncome() {
+        double income = 0.0;
+        ArrayList<Reservation> reservations = dao.findAllMadeToday();
+        
+        for (Reservation reservation : reservations) {
+            income += reservation.totalPrice();
+        }
+        
+        return income;
+    }
+    
+    public boolean deleteReservation(Reservation reservation) {
+        return dao.delete(reservation);
     }
 }

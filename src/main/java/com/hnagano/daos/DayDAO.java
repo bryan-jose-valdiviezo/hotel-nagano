@@ -73,6 +73,28 @@ public class DayDAO implements DAO<Day>{
         
         return dayPrices;
     }
+    
+    public List<DayPrice> findAllDayWithPrices() {
+        List<DayPrice> dayPrices = new LinkedList<DayPrice>();
+        DayPrice dayPrice;
+        
+        try {
+            Statement stm = database.getInstance().createStatement();
+            ResultSet res = stm.executeQuery("SELECT days.id, day_type, start_at, price FROM days INNER JOIN day_prices ON days.id = day_prices.day_type_id ORDER BY start_at DESC");
+            
+            while(res.next()) {
+                dayPrice = new DayPrice(objectBuilder(res));
+                dayPrice.setDateStart(res.getDate("start_at").toLocalDate());
+                dayPrice.setPrice(res.getDouble("price"));
+                
+                dayPrices.add(dayPrice);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DayDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return dayPrices;
+    }
 
     @Override
     public Day find(int id) {
@@ -92,6 +114,31 @@ public class DayDAO implements DAO<Day>{
         }
         
         return day;
+    }
+    
+    public DayPrice findWithCurrentPrice(int id) {
+        DayPrice dayPrice = null;
+        
+        try {
+            PreparedStatement stm = database.getInstance().prepareStatement("SELECT days.id, day_type, start_at, price FROM days "+
+                    "INNER JOIN day_prices ON days.id = day_prices.day_type_id "+
+                    "WHERE start_at <= CURRENT_DATE AND days.id = ? ORDER BY start_at DESC LIMIT 1");
+            
+            stm.setInt(1, id);
+            
+            ResultSet res = stm.executeQuery();
+            
+            if (res.next()) {
+                dayPrice = new DayPrice(objectBuilder(res));
+                dayPrice.setDateStart(res.getDate("start_at").toLocalDate());
+                dayPrice.setPrice(res.getDouble("price"));
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(DayDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            
+        return dayPrice;
     }
     
     public DayPrice findDayPriceByDate(LocalDate date) {

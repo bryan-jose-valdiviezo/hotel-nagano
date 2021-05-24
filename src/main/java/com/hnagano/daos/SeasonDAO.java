@@ -54,7 +54,7 @@ public class SeasonDAO implements DAO<Season>{
         
         try {
             Statement stm = database.getInstance().createStatement();
-            ResultSet res = stm.executeQuery("SELECT * FROM seasons");
+            ResultSet res = stm.executeQuery("SELECT * FROM seasons ORDER BY date_start DESC");
             
             while(res.next()) {
                 seasons.add(objectBuilder(res));
@@ -86,7 +86,7 @@ public class SeasonDAO implements DAO<Season>{
     @Override
     public boolean create(Season season) {
         try {
-            PreparedStatement stm = database.getInstance().prepareStatement("INSERT INTO seasons(price, date_start, date_end, event)");
+            PreparedStatement stm = database.getInstance().prepareStatement("INSERT INTO seasons(price, date_start, date_end, event) VALUES (?,?,?,?)");
             stm.setDouble(1, season.getPrice());
             stm.setDate(2, Date.valueOf(season.getDateStart()));
             stm.setDate(3, Date.valueOf(season.getDateEnd()));

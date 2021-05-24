@@ -3,42 +3,36 @@
     Created on : May 9, 2021, 1:48:07 AM
     Author     : Bryan
 --%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
-        <link href="resources/style/bootstrap/css/bootstrap.min.css" rel="stylesheet" text="text/css" />
-        <link href="resources/style/style.css" rel="stylesheet" type="text/css" />
+        <link href="<c:url value="/resources/style/bootstrap/css/bootstrap.min.css?version=51" />" rel="stylesheet" type="text/css" />
+        <link href="<c:url value="/resources/style/style.css?version=51" />" rel='stylesheet' type="text/css" />
+        <script src="../resources/javascript/my_ajax.js"></script>
+        <script src="../resources/javascript/jquery-3.6.0.min.js"></script>
     </head>
     <body>
         <jsp:include page="header.jsp"/>
         
         <div class="container">
             <h2>Welcome to</h2>
-            <img src="resources/data/hotel-nagano-giant-logo.png" class="mb-2">
+            <img src="<c:url value="/resources/data/hotel-nagano-giant-logo.png" />" class="mb-2">
         </div>
-        
-        <div class="container custom_container">
-            <h2>Look for a reservation</h2>
-            <form>
-                <div class="row">
-                    <div class="form-group col-lg-6">
-                        <label for="email">Email</label>
-                        <input type="text" name="email" class="form-control">
-                    </div>
 
-                    <div class="form-group col-lg-6">
-                        <label for="reservation_number">Reservation Number</label>
-                        <input type="number" name="reservation_number" class="form-control">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <input type="submit" value="Search" class="submit-button">
-                </div>
-            </form>
-        </div>
+            <c:if test="${not empty sessionScope.user && sessionScope.user.role == 'ADMIN'}">
+                <jsp:include page="partials/reservations/dailyReservationInfoPartial.jsp"/>
+            </c:if>
+        
+            <c:if test="${empty sessionScope.user || sessionScope.user.role != 'ADMIN'}">
+                <jsp:include page="partials/reservations/reservationSearchPartial.jsp" />
+                
+                <c:if test="${not empty sessionScope.user}">
+                    <jsp:include page="reservations/admin/adminReservationsList.jsp" />
+                </c:if>
+            </c:if>
     </body>
 </html>

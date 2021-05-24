@@ -5,9 +5,16 @@
  */
 package com.hnagano.controllers;
 
+import com.hnagano.services.ReservationServices;
+import com.hnagano.dtos.ReservationSearchDTO;
+import com.hnagano.models.Reservation;
+import com.hnagano.models.User;
+import java.util.ArrayList;
 import java.util.List;
+import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -18,9 +25,41 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class IndexController {
-    @RequestMapping(value="/", method = RequestMethod.GET)
-    public String welcome(ModelMap model) {
+    private ReservationServices reservationServices;
 
+    public void setReservationServices(ReservationServices reservationServices) {
+        this.reservationServices = reservationServices;
+    }
+    
+    @RequestMapping(value="/", method = RequestMethod.GET)
+    public String welcome(ModelMap model, HttpSession session) {
+        ArrayList<Reservation> reservations;
+        
+        User user = (User) session.getAttribute("user");
+        if (user != null && user.getRole().equals("ADMIN")) {
+            return "redirect:/admin/";
+        } else if (user != null) {
+            System.out.println("User present");
+            System.out.println("User email: "+ user.getEmail());
+            reservations = reservationServices.findAllByEmail(user.getEmail());
+            System.out.println("Number reservations : " + reservations.size());
+            model.addAttribute("reservations", reservations);
+        }
+        
+        model.put("reservationSearchDTO", new ReservationSearchDTO());
         return "mainPage";
     }
+    
+    @RequestMapping(value="/", method = RequestMethod.POST)
+    public String findReservation(@ModelAttribute ReservationSearchDTO form, HttpSession session) {
+        Reservation reservation = reservationServices.findByIdAndEmail(form.getId(), form.getEmail());
+        
+        if (reservation != null) {
+            session.setAttribute("reservationPermission", true);
+            return "redirect:/reservations/" + reservation.getId();
+        }
+        
+        return "redirect:/";
+    }
 }
+

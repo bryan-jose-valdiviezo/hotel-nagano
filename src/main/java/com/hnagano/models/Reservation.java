@@ -17,6 +17,7 @@ public class Reservation {
     private int customerCount;
     private LocalDate dateStart;
     private LocalDate dateEnd;
+    private LocalDate creationDate;
     private String specialInstructions;
     private ArrayList<Room> rooms;
     private String email;
@@ -53,6 +54,14 @@ public class Reservation {
 
     public void setDateEnd(LocalDate dateEnd) {
         this.dateEnd = dateEnd;
+    }
+
+    public LocalDate getCreationDate() {
+        return creationDate;
+    }
+
+    public void setCreationDate(LocalDate creationDate) {
+        this.creationDate = creationDate;
     }
 
     public String getSpecialInstructions() {

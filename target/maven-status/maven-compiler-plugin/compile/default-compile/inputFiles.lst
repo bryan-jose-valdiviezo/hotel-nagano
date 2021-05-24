@@ -1,35 +1,52 @@
-D:\Users\Memes\Documents\NetBeansProjects\TableMultExercice\HotelNagano\src\main\java\com\hnagano\services\RoomServices.java
-D:\Users\Memes\Documents\NetBeansProjects\TableMultExercice\HotelNagano\src\main\java\com\hnagano\daos\CartDAO.java
-D:\Users\Memes\Documents\NetBeansProjects\TableMultExercice\HotelNagano\src\main\java\com\hnagano\dtos\RoomSearchDTO.java
-D:\Users\Memes\Documents\NetBeansProjects\TableMultExercice\HotelNagano\src\main\java\com\hnagano\daos\SeasonDAO.java
-D:\Users\Memes\Documents\NetBeansProjects\TableMultExercice\HotelNagano\src\main\java\com\hnagano\models\View.java
-D:\Users\Memes\Documents\NetBeansProjects\TableMultExercice\HotelNagano\src\main\java\com\hnagano\daos\RoomDAO.java
-D:\Users\Memes\Documents\NetBeansProjects\TableMultExercice\HotelNagano\src\main\java\com\hnagano\models\Cart.java
-D:\Users\Memes\Documents\NetBeansProjects\TableMultExercice\HotelNagano\src\main\java\com\hnagano\controllers\ReservationsController.java
-D:\Users\Memes\Documents\NetBeansProjects\TableMultExercice\HotelNagano\src\main\java\com\hnagano\daos\DAO.java
-D:\Users\Memes\Documents\NetBeansProjects\TableMultExercice\HotelNagano\src\main\java\com\hnagano\models\ViewPrice.java
-D:\Users\Memes\Documents\NetBeansProjects\TableMultExercice\HotelNagano\src\main\java\com\hnagano\daos\CartRoomDAO.java
-D:\Users\Memes\Documents\NetBeansProjects\TableMultExercice\HotelNagano\src\main\java\com\hnagano\modules\JsonWriter.java
-D:\Users\Memes\Documents\NetBeansProjects\TableMultExercice\HotelNagano\src\main\java\com\hnagano\services\SuiteServices.java
-D:\Users\Memes\Documents\NetBeansProjects\TableMultExercice\HotelNagano\src\main\java\com\hnagano\models\Room.java
-D:\Users\Memes\Documents\NetBeansProjects\TableMultExercice\HotelNagano\src\main\java\com\hnagano\daos\DatePriceDAO.java
-D:\Users\Memes\Documents\NetBeansProjects\TableMultExercice\HotelNagano\src\main\java\com\hnagano\daos\ReservationDAO.java
-D:\Users\Memes\Documents\NetBeansProjects\TableMultExercice\HotelNagano\src\main\java\com\hnagano\daos\UserDAO.java
-D:\Users\Memes\Documents\NetBeansProjects\TableMultExercice\HotelNagano\src\main\java\com\hnagano\services\ReservationServices.java
-D:\Users\Memes\Documents\NetBeansProjects\TableMultExercice\HotelNagano\src\main\java\com\hnagano\models\DatePrice.java
-D:\Users\Memes\Documents\NetBeansProjects\TableMultExercice\HotelNagano\src\main\java\com\hnagano\daos\DayDAO.java
-D:\Users\Memes\Documents\NetBeansProjects\TableMultExercice\HotelNagano\src\main\java\com\hnagano\models\DayPrice.java
-D:\Users\Memes\Documents\NetBeansProjects\TableMultExercice\HotelNagano\src\main\java\com\hnagano\services\DatePriceServices.java
-D:\Users\Memes\Documents\NetBeansProjects\TableMultExercice\HotelNagano\src\main\java\com\hnagano\models\Season.java
-D:\Users\Memes\Documents\NetBeansProjects\TableMultExercice\HotelNagano\src\main\java\com\hnagano\controllers\IndexController.java
-D:\Users\Memes\Documents\NetBeansProjects\TableMultExercice\HotelNagano\src\main\java\com\hnagano\controllers\RoomsController.java
-D:\Users\Memes\Documents\NetBeansProjects\TableMultExercice\HotelNagano\src\main\java\com\hnagano\models\Suite.java
-D:\Users\Memes\Documents\NetBeansProjects\TableMultExercice\HotelNagano\src\main\java\com\hnagano\models\Reservation.java
-D:\Users\Memes\Documents\NetBeansProjects\TableMultExercice\HotelNagano\src\main\java\com\hnagano\services\ViewServices.java
-D:\Users\Memes\Documents\NetBeansProjects\TableMultExercice\HotelNagano\src\main\java\com\hnagano\daos\ViewDAO.java
-D:\Users\Memes\Documents\NetBeansProjects\TableMultExercice\HotelNagano\src\main\java\com\hnagano\daos\SuiteDAO.java
-D:\Users\Memes\Documents\NetBeansProjects\TableMultExercice\HotelNagano\src\main\java\com\hnagano\models\Day.java
-D:\Users\Memes\Documents\NetBeansProjects\TableMultExercice\HotelNagano\src\main\java\com\hnagano\models\User.java
-D:\Users\Memes\Documents\NetBeansProjects\TableMultExercice\HotelNagano\src\main\java\com\hnagano\databases\Database.java
-D:\Users\Memes\Documents\NetBeansProjects\TableMultExercice\HotelNagano\src\main\java\com\hnagano\models\SuitePrice.java
-D:\Users\Memes\Documents\NetBeansProjects\TableMultExercice\HotelNagano\src\main\java\com\hnagano\dtos\ReservationDTO.java
+C:\Users\Memes\Hotel Nagano\hotel-nagano\src\main\java\com\hnagano\dtos\ViewPriceDTO.java
+C:\Users\Memes\Hotel Nagano\hotel-nagano\src\main\java\com\hnagano\daos\SeasonDAO.java
+C:\Users\Memes\Hotel Nagano\hotel-nagano\src\main\java\com\hnagano\dtos\RoomSearchDTO.java
+C:\Users\Memes\Hotel Nagano\hotel-nagano\src\main\java\com\hnagano\models\Cart.java
+C:\Users\Memes\Hotel Nagano\hotel-nagano\src\main\java\com\hnagano\controllers\AdminIndexController.java
+C:\Users\Memes\Hotel Nagano\hotel-nagano\src\main\java\com\hnagano\models\DayPrice.java
+C:\Users\Memes\Hotel Nagano\hotel-nagano\src\main\java\com\hnagano\controllers\AdminPricesController.java
+C:\Users\Memes\Hotel Nagano\hotel-nagano\src\main\java\com\hnagano\daos\SuiteDAO.java
+C:\Users\Memes\Hotel Nagano\hotel-nagano\src\main\java\com\hnagano\services\DatePriceServices.java
+C:\Users\Memes\Hotel Nagano\hotel-nagano\src\main\java\com\hnagano\models\Suite.java
+C:\Users\Memes\Hotel Nagano\hotel-nagano\src\main\java\com\hnagano\dtos\ReservationSearchDTO.java
+C:\Users\Memes\Hotel Nagano\hotel-nagano\src\main\java\com\hnagano\dtos\SuitePriceDTO.java
+C:\Users\Memes\Hotel Nagano\hotel-nagano\src\main\java\com\hnagano\dtos\DayPriceDTO.java
+C:\Users\Memes\Hotel Nagano\hotel-nagano\src\main\java\com\hnagano\models\View.java
+C:\Users\Memes\Hotel Nagano\hotel-nagano\src\main\java\com\hnagano\services\ReservationServices.java
+C:\Users\Memes\Hotel Nagano\hotel-nagano\src\main\java\com\hnagano\daos\UserDAO.java
+C:\Users\Memes\Hotel Nagano\hotel-nagano\src\main\java\com\hnagano\databases\Database.java
+C:\Users\Memes\Hotel Nagano\hotel-nagano\src\main\java\com\hnagano\models\Season.java
+C:\Users\Memes\Hotel Nagano\hotel-nagano\src\main\java\com\hnagano\services\DayServices.java
+C:\Users\Memes\Hotel Nagano\hotel-nagano\src\main\java\com\hnagano\controllers\AdminRoomsController.java
+C:\Users\Memes\Hotel Nagano\hotel-nagano\src\main\java\com\hnagano\models\ViewPrice.java
+C:\Users\Memes\Hotel Nagano\hotel-nagano\src\main\java\com\hnagano\dtos\RoomDTO.java
+C:\Users\Memes\Hotel Nagano\hotel-nagano\src\main\java\com\hnagano\models\Reservation.java
+C:\Users\Memes\Hotel Nagano\hotel-nagano\src\main\java\com\hnagano\dtos\SeasonPriceDTO.java
+C:\Users\Memes\Hotel Nagano\hotel-nagano\src\main\java\com\hnagano\daos\RoomDAO.java
+C:\Users\Memes\Hotel Nagano\hotel-nagano\src\main\java\com\hnagano\dtos\PriceChangeDTO.java
+C:\Users\Memes\Hotel Nagano\hotel-nagano\src\main\java\com\hnagano\services\RoomServices.java
+C:\Users\Memes\Hotel Nagano\hotel-nagano\src\main\java\com\hnagano\controllers\AdminReservationsController.java
+C:\Users\Memes\Hotel Nagano\hotel-nagano\src\main\java\com\hnagano\daos\DAO.java
+C:\Users\Memes\Hotel Nagano\hotel-nagano\src\main\java\com\hnagano\services\UserServices.java
+C:\Users\Memes\Hotel Nagano\hotel-nagano\src\main\java\com\hnagano\controllers\ReservationsController.java
+C:\Users\Memes\Hotel Nagano\hotel-nagano\src\main\java\com\hnagano\controllers\LoginController.java
+C:\Users\Memes\Hotel Nagano\hotel-nagano\src\main\java\com\hnagano\services\SeasonServices.java
+C:\Users\Memes\Hotel Nagano\hotel-nagano\src\main\java\com\hnagano\modules\JsonWriter.java
+C:\Users\Memes\Hotel Nagano\hotel-nagano\src\main\java\com\hnagano\models\Day.java
+C:\Users\Memes\Hotel Nagano\hotel-nagano\src\main\java\com\hnagano\controllers\RoomsController.java
+C:\Users\Memes\Hotel Nagano\hotel-nagano\src\main\java\com\hnagano\dtos\AdminReservationDTO.java
+C:\Users\Memes\Hotel Nagano\hotel-nagano\src\main\java\com\hnagano\daos\ViewDAO.java
+C:\Users\Memes\Hotel Nagano\hotel-nagano\src\main\java\com\hnagano\daos\ReservationDAO.java
+C:\Users\Memes\Hotel Nagano\hotel-nagano\src\main\java\com\hnagano\services\SuiteServices.java
+C:\Users\Memes\Hotel Nagano\hotel-nagano\src\main\java\com\hnagano\daos\DatePriceDAO.java
+C:\Users\Memes\Hotel Nagano\hotel-nagano\src\main\java\com\hnagano\daos\CartRoomDAO.java
+C:\Users\Memes\Hotel Nagano\hotel-nagano\src\main\java\com\hnagano\models\SuitePrice.java
+C:\Users\Memes\Hotel Nagano\hotel-nagano\src\main\java\com\hnagano\models\DatePrice.java
+C:\Users\Memes\Hotel Nagano\hotel-nagano\src\main\java\com\hnagano\models\User.java
+C:\Users\Memes\Hotel Nagano\hotel-nagano\src\main\java\com\hnagano\daos\CartDAO.java
+C:\Users\Memes\Hotel Nagano\hotel-nagano\src\main\java\com\hnagano\dtos\AdminRoomSearchDTO.java
+C:\Users\Memes\Hotel Nagano\hotel-nagano\src\main\java\com\hnagano\dtos\ReservationDTO.java
+C:\Users\Memes\Hotel Nagano\hotel-nagano\src\main\java\com\hnagano\controllers\IndexController.java
+C:\Users\Memes\Hotel Nagano\hotel-nagano\src\main\java\com\hnagano\services\ViewServices.java
+C:\Users\Memes\Hotel Nagano\hotel-nagano\src\main\java\com\hnagano\daos\DayDAO.java
+C:\Users\Memes\Hotel Nagano\hotel-nagano\src\main\java\com\hnagano\models\Room.java
