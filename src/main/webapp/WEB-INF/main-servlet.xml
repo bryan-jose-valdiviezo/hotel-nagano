@@ -35,10 +35,18 @@
         <property name="dao" ref="reservationDAO" />
     </bean>
 
+    <bean name ="userServices" class="com.hnagano.services.UserServices">
+        <property name="dao" ref="userDAO" />
+    </bean>
+
+    <bean name ="loginController" class="com.hnagano.controllers.LoginController">
+        <property name="userServices" ref="userServices" />
+    </bean>
+
     <bean name="indexController" class="com.hnagano.controllers.IndexController">
         
     </bean>
-    
+
     <bean name="roomsController" class="com.hnagano.controllers.RoomsController">
         <property name="viewServices" ref="viewServices" />
         <property name="suiteServices" ref="suiteServices" />

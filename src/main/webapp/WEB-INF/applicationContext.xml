@@ -49,4 +49,8 @@
         <property name="roomDAO" ref="roomDAO" />
     </bean>
 
+    <bean id="userDAO" class="com.hnagano.daos.UserDAO">
+        <property name="database" ref="database"/>
+    </bean>
+
 </beans>
