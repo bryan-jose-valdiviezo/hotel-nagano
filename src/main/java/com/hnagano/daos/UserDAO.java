@@ -50,7 +50,7 @@ public class UserDAO {
                     user.setPhone(res.getInt("phone"));
                     user.setEmail(res.getString("email"));
                     user.setAddress(res.getString("address"));
-                    user.setRole(res.getString("role_id"));
+                    user.setRole(res.getString("role"));
                     user.setUsername(res.getString("username"));
                     user.setPassword(res.getString("password"));
                 }
@@ -93,19 +93,18 @@ public class UserDAO {
         return user;
     }
 
-    public Boolean createUser(String name, String email, int phone, String address, String role,String username, String password ) {
+    public Boolean createUser(String name, String email, int phone, String address, String username, String password ) {
 
         try {
-            PreparedStatement stm = database.getInstance().prepareStatement("INSERT INTO user SET name = ?, email = ?, phone = ?," +
-                    " address = ?, role_id = ?, username = ?, password = ?");
+            PreparedStatement stm = database.getInstance().prepareStatement("INSERT INTO users SET name = ?, email = ?, phone = ?," +
+                    " address = ?, username = ?, password = ?, role = 'CUSTOMER'");
 
             stm.setString(1, name);
             stm.setString(2, email);
             stm.setInt(3, phone);
             stm.setString(4, address);
-            stm.setString(5, role);
-            stm.setString(6, username);
-            stm.setString(7, password);
+            stm.setString(5, username);
+            stm.setString(6, password);
 
             stm.execute();
 
@@ -118,20 +117,19 @@ public class UserDAO {
         return null;
     }
 
-    public Boolean updateUser(String name, String email, int phone, String address, String role, String username, String password ) {
+    public Boolean updateUser(String name, String email, int phone, String address, String username, String password ) {
 
         try {
 
-            PreparedStatement stm = database.getInstance().prepareStatement("UPDATE user SET name = ?, phone = ?," +
-                    " address = ?, role = ?, username = ?, password = ? WHERE email = ?");
+            PreparedStatement stm = database.getInstance().prepareStatement("UPDATE users SET name = ?, phone = ?," +
+                    " address = ?, username = ?, password = ? WHERE email = ?");
 
             stm.setString(1, name);
             stm.setInt(2, phone);
             stm.setString(3, address);
-            stm.setString(4, role);
-            stm.setString(5, username);
-            stm.setString(6, password);
-            stm.setString(7, email);
+            stm.setString(4, username);
+            stm.setString(5, password);
+            stm.setString(6, email);
 
             stm.execute();
 
@@ -149,7 +147,7 @@ public class UserDAO {
 
         try {
 
-            PreparedStatement stm = database.getInstance().prepareStatement("DELETE FROM user WHERE username = ?, password = ?");
+            PreparedStatement stm = database.getInstance().prepareStatement("DELETE FROM users WHERE username = ?, password = ?");
 
             stm.setString(1, username);
             stm.setString(2, password);
