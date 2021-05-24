@@ -29,7 +29,7 @@
         if(session.getAttribute("user") != null)
         {
     %>
-    <a href="/HotelNagano/login/logoutPage)">Sign out</a>
+    <a href="/HotelNagano/login/logoutPage">Sign out</a>
     <%
         }
     %>
