@@ -12,6 +12,7 @@ import java.util.ArrayList;
  * @author Bryan
  */
 public class User {
+    private String username;
     private String name;
     private String email;
     private int phone;
@@ -20,6 +21,14 @@ public class User {
     private String password;
     private ArrayList<Reservation> reservations;
     private Cart cart;
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
     public String getName() {
         return name;
