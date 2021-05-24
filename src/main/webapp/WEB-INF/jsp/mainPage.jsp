@@ -29,6 +29,10 @@
         
             <c:if test="${empty sessionScope.user || sessionScope.user.role != 'ADMIN'}">
                 <jsp:include page="partials/reservations/reservationSearchPartial.jsp" />
+                
+                <c:if test="${not empty sessionScope.user}">
+                    <jsp:include page="reservations/admin/adminReservationsList.jsp" />
+                </c:if>
             </c:if>
     </body>
 </html>

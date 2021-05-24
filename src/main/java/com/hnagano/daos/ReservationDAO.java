@@ -91,6 +91,24 @@ public class ReservationDAO implements DAO<Reservation>{
         return reservations;
     }
     
+    public ArrayList<Reservation> findAllByEmail(String email) {
+        ArrayList<Reservation> reservations = new ArrayList<Reservation>();
+        
+        try {
+            PreparedStatement stm = database.getInstance().prepareStatement("SELECT * FROM reservations WHERE email LIKE ?");
+            stm.setString(1, email);
+            ResultSet res = stm.executeQuery();
+            
+            while (res.next())
+                reservations.add(objectBuilder(res));
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(ReservationDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return reservations;
+    }
+    
     public ArrayList<Reservation> findAllByFilter(ReservationSearchDTO form) {
         ArrayList<Reservation> reservations = new ArrayList<Reservation>();
         Reservation reservation;

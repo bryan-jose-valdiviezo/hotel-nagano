@@ -98,13 +98,20 @@ public class ReservationsController {
     
     @RequestMapping(value="/{id}", method = RequestMethod.GET)
     public String showReservation(@PathVariable("id") int id, ModelMap model, HttpSession session) {
-        
-        if (session.getAttribute("reservationPermission") != null)
-            session.removeAttribute("reservationPermission");
-        else
-            return "redirect:/";
-        
         Reservation reservation = reservationServices.findReservation(id);
+        
+        if (session.getAttribute("reservationPermission") != null) {
+            session.removeAttribute("reservationPermission");
+        } else {
+            if (session.getAttribute("user") != null) {
+                User user = (User) session.getAttribute("user");
+                if (!user.getEmail().equals(reservation.getEmail()))
+                    return "redirect:/";
+            } else {
+                return "redirect:/";
+            }
+        }
+        
         model.addAttribute("reservation", reservation);
         
        return "reservations/showReservation"; 

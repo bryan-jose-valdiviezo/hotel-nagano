@@ -56,13 +56,14 @@ public class LoginController {
 
     @RequestMapping(value = "/logoutPage", method = RequestMethod.GET)
     public String logout(HttpSession session, User user, ModelMap model) {
+        session.removeAttribute("user");
         model.addAttribute("modele", user);
-        return "login/logoutPage";
+        return "redirect:/";
     }
 
     @PostMapping(value = "/logoutPage")
     public String doLogout(HttpSession session, ModelMap model) {
-        session.invalidate();
+        session.removeAttribute("user");
         model.addAttribute("modele", new User());
         return "redirect:/";
     }

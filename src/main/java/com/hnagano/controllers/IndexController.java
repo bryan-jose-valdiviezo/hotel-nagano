@@ -9,6 +9,7 @@ import com.hnagano.services.ReservationServices;
 import com.hnagano.dtos.ReservationSearchDTO;
 import com.hnagano.models.Reservation;
 import com.hnagano.models.User;
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
@@ -32,10 +33,17 @@ public class IndexController {
     
     @RequestMapping(value="/", method = RequestMethod.GET)
     public String welcome(ModelMap model, HttpSession session) {
+        ArrayList<Reservation> reservations;
         
         User user = (User) session.getAttribute("user");
         if (user != null && user.getRole().equals("ADMIN")) {
             return "redirect:/admin/";
+        } else if (user != null) {
+            System.out.println("User present");
+            System.out.println("User email: "+ user.getEmail());
+            reservations = reservationServices.findAllByEmail(user.getEmail());
+            System.out.println("Number reservations : " + reservations.size());
+            model.addAttribute("reservations", reservations);
         }
         
         model.put("reservationSearchDTO", new ReservationSearchDTO());
