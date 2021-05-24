@@ -22,6 +22,10 @@ public class SuiteServices {
         this.dao = dao;
     }
     
+    public Suite findSuite(int id) {
+        return dao.find(id);
+    }
+    
     public List<Suite> getAllSuites(){
         return dao.findAll();
     }

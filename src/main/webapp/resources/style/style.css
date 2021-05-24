@@ -61,6 +61,36 @@ body {
     overflow: hidden;
 }
 
+.custom-top-half-container {
+    color: white;
+    background-color: rgba(0,0,0,0.5);
+    border-radius: 20px 20px 0px 0px;
+    display: inline-block;
+    transition: all 0.5s;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.custom-bottom-half-container {
+    color: white;
+    background-color: rgba(237, 111, 111,0.5);
+    border-radius: 0px 0px 20px 20px;
+    display: inline-block;
+    transition: all 0.5s;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.custom-top-half-container:hover {
+    transform: scale(1.1);
+    border-radius: 20px;
+}
+
+.custom-bottom-half-container:hover {
+    transform: scale(1.1);
+    border-radius: 20px;
+}
+
 .container img {
     width: 100%;
 }
@@ -136,4 +166,13 @@ nav a {
 
 .modal-backdrop.show {
     opacity: .8;
+}
+
+.add-room-button {
+    background-color: rgba(67, 209, 77,0.6);
+    cursor: pointer;
+}
+
+#adminRoomList button {
+    border-width: 0px;
 }

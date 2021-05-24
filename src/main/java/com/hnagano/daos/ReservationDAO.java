@@ -6,6 +6,8 @@
 package com.hnagano.daos;
 
 import com.hnagano.databases.Database;
+import com.hnagano.dtos.AdminReservationDTO;
+import com.hnagano.dtos.ReservationSearchDTO;
 import com.hnagano.models.Reservation;
 import com.hnagano.models.Room;
 import java.sql.Date;
@@ -84,6 +86,42 @@ public class ReservationDAO implements DAO<Reservation>{
         List<Reservation> reservations = findAll();
         for (int i = 0; i < reservations.size() ; i++) {
             reservations.get(i).setRooms(roomDAO.findAllForReservation(reservations.get(i), withPrices));
+        }
+        
+        return reservations;
+    }
+    
+    public ArrayList<Reservation> findAllByFilter(ReservationSearchDTO form) {
+        ArrayList<Reservation> reservations = new ArrayList<Reservation>();
+        Reservation reservation;
+        
+        try {
+            String query = "SELECT * FROM reservations";
+            boolean firstEntry = true;
+            
+            if (form.getId() > 0) {
+                query += " WHERE id = " + form.getId();
+                firstEntry = false;
+            }
+            
+            if (form.getEmail() != null && form.getEmail().length() > 0) {
+                if (firstEntry)
+                    query += " WHERE email LIKE '" + form.getEmail() + "'";
+                else
+                    query += " AND email LIKE '" + form.getEmail() + "'";
+            }
+            
+            PreparedStatement stm = database.getInstance().prepareStatement(query);
+            
+            ResultSet res = stm.executeQuery();
+            
+            while (res.next()) {
+                reservation = objectBuilder(res);
+                reservations.add(reservation);
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(ReservationDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         return reservations;
@@ -211,6 +249,22 @@ public class ReservationDAO implements DAO<Reservation>{
         
         return false;
     }
+    
+    public boolean deleteAllRoomsFromReservation(int reservationID) {
+        try {
+            PreparedStatement stm = database.getInstance().prepareStatement("DELETE FROM reservation_rooms WHERE reservation_id = ?");
+            stm.setInt(1, reservationID);
+            
+            int n = stm.executeUpdate();
+            
+            return n>0;
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(ReservationDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return false;
+    }
 
     @Override
     public boolean delete(Reservation reservation) {
@@ -229,8 +283,32 @@ public class ReservationDAO implements DAO<Reservation>{
     }
 
     @Override
-    public boolean update(Reservation t) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean update(Reservation reservation) {
+        try {
+            PreparedStatement stm = database.getInstance().prepareStatement("UPDATE reservations SET"
+                    + " customer_count = ?, special_instructions = ?, name = ? "
+                    + "WHERE id = ?");
+            
+            stm.setInt(1, reservation.getCustomerCount());
+            stm.setString(2, reservation.getSpecialInstructions());
+            stm.setString(3, reservation.getName());
+            stm.setInt(4, reservation.getId());
+            
+            int n = stm.executeUpdate();
+            
+            if (n > 0) {
+                deleteAllRoomsFromReservation(reservation.getId());
+                for (Room room : reservation.getRooms())
+                    createReservationRoomLink(reservation.getId(), room.getId());
+                
+                return true;
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(ReservationDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return false;
     }
 
     @Override

@@ -22,6 +22,10 @@ public class ViewServices {
         this.dao = dao;
     }
     
+    public View findView(int id) {
+        return dao.find(id);
+    }
+    
     public List<View> getAllViews() {
         return dao.findAll();
     }

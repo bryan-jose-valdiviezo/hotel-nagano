@@ -6,6 +6,7 @@
 package com.hnagano.daos;
 
 import com.hnagano.databases.Database;
+import com.hnagano.dtos.AdminRoomSearchDTO;
 import com.hnagano.dtos.RoomSearchDTO;
 import com.hnagano.models.DatePrice;
 import com.hnagano.models.Reservation;
@@ -105,6 +106,98 @@ public class RoomDAO implements DAO<Room>{
         }
         
         return availableRoomsCount;
+    }
+    
+    public ArrayList<Room> findRoomsByFilter(AdminRoomSearchDTO filter) {
+        ArrayList<Room> rooms = new ArrayList<Room>();
+        Room room;
+        boolean startingFilter = true;
+        
+        try {
+            String query = "SELECT * FROM rooms";
+            if (filter.getId() > 0) {
+                query += " WHERE id = "+ filter.getId();
+                startingFilter = false;
+            }
+            
+            if (filter.getViewID() > 0) {
+                if (startingFilter)
+                    query += " WHERE view_id = "+ filter.getViewID();
+                else
+                    query += " AND view_id = "+ filter.getViewID();
+            }
+            
+            if (filter.getSuiteID() > 0) {
+                if (startingFilter)
+                    query += " WHERE suite_id = "+ filter.getSuiteID();
+                else
+                    query += " AND suite_id = "+ filter.getSuiteID();
+            }
+            
+            if (filter.getFloor() > 0) {
+                if (startingFilter)
+                    query += " WHERE floor = "+ filter.getFloor();
+                else
+                    query += " AND floor = "+ filter.getFloor();
+            }
+            
+            PreparedStatement stm = database.getInstance().prepareStatement(query);
+            
+            ResultSet res = stm.executeQuery();
+            
+            while (res.next()) {
+                room = objectBuilder(res);
+                rooms.add(room);
+            }
+                        
+        } catch (SQLException ex) {
+            Logger.getLogger(RoomDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return rooms;
+    }
+    
+    public ArrayList<Room> findAllAvailableRoomsByDate(LocalDate dateStart, LocalDate dateEnd) {
+        ArrayList<Room> allRooms = new ArrayList<Room>();
+        Room room;
+        
+        try {
+            
+            
+            String query = "SELECT rooms.*, date_start, date_end FROM rooms "
+                    + "INNER JOIN reservation_rooms ON rooms.id = reservation_rooms.room_id "
+                    + "INNER JOIN reservations ON reservations.id = reservation_rooms.reservation_id "
+                    + "WHERE rooms.id NOT IN ("
+                    + "SELECT rooms.id FROM rooms "
+                    + "INNER JOIN reservation_rooms ON rooms.id = reservation_rooms.room_id "
+                    + "INNER JOIN reservations ON reservations.id = reservation_rooms.reservation_id "
+                    + "WHERE (? <= date_end AND ? >= date_start)) GROUP BY rooms.id";
+            
+            
+            PreparedStatement stm = database.getInstance().prepareStatement(query);
+            
+            stm.setDate(1, Date.valueOf(dateStart));
+            stm.setDate(2, Date.valueOf(dateEnd));
+            
+            
+            ResultSet res = stm.executeQuery();
+            
+            while (res.next()) {
+                room = objectBuilder(res);
+                allRooms.add(room);
+            }
+            
+                  
+            for (int i = 0; i < allRooms.size() ; i++) {
+                
+                allRooms.get(i).setDatePrices(datePriceDAO.getTotalRoomPrice(allRooms.get(i), dateStart, dateEnd));
+            }
+            
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(RoomDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+         return allRooms;
     }
     
     public ArrayList<Room> findAllAvailableRoomsByFilter(RoomSearchDTO filter) {
@@ -242,10 +335,46 @@ public class RoomDAO implements DAO<Room>{
         
         return false;
     }
+    
+    public Room createWithReturn(Room room) {
+        Room newRoom = null;
+        
+        try {
+            PreparedStatement stm = database.getInstance().prepareStatement("INSERT INTO rooms (view_id, suite_id, floor) VALUES (?,?,?)", Statement.RETURN_GENERATED_KEYS);
+            stm.setInt(1, room.getView().getId());
+            stm.setInt(2, room.getSuite().getId());
+            stm.setInt(3, room.getFloor());
+            
+            int n = stm.executeUpdate();
+            
+            if (n>0) {
+                ResultSet res = stm.getGeneratedKeys();
+                res.next();
+                int id = res.getInt(1);
+                newRoom = find(id);
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(RoomDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return newRoom;
+    }
 
     @Override
-    public boolean delete(Room t) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean delete(Room room) {
+        try {
+            PreparedStatement stm = database.getInstance().prepareStatement("DELETE FROM rooms WHERE id = ?");
+            stm.setInt(1, room.getId());
+            
+            int n = stm.executeUpdate();
+            
+            return n>0;
+        } catch (SQLException ex) {
+            Logger.getLogger(RoomDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return false;
     }
 
     @Override

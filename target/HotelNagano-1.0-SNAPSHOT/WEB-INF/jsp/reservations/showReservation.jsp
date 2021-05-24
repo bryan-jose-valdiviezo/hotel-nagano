@@ -14,74 +14,68 @@
         <title>JSP Page</title>
         <link href="<c:url value="/resources/style/bootstrap/css/bootstrap.min.css?version=51" />" rel="stylesheet" type="text/css" />
         <link href="<c:url value="/resources/style/style.css?version=51" />" rel='stylesheet' type="text/css" />
-        <script src="../resources/javascript/my_ajax.js"></script>
-        <script src="../resources/javascript/jquery-3.6.0.min.js"></script>
+        <script src="<c:url value="/resources/javascript/my_ajax.js" />"></script>
+        <script src="<c:url value="/resources/javascript/jquery-3.6.0.min.js" />"></script>
+        <script src="<c:url value="/resources/style/bootstrap/js/bootstrap.min.js" />"></script>
     </head>
     <body>
+        <script>
+            function OpenUpdateReservationModal() {
+                var url = window.location.href;  
+                
+                $.ajax({
+                   url: url+'/modify-reservation',
+                   type: 'GET',
+                   success: function(response) {
+                       $('#modalBody').html(response);
+                       $('#exampleModal').modal('show');
+                   }
+                });
+            }
+            
+            function DeleteReservation() {
+                var confirmation = confirm("Do you want to proceed in deleting the reservation ?");
+                
+                if (confirmation) {
+                   var url = window.location.href;
+                    $.ajax({
+                       url: url+'/delete-reservation',
+                       type: 'POST',
+                       success: function(response) {
+                           window.location = "/HotelNagano/admin/reservations/"
+                       }
+                    }); 
+                }
+            }
+        </script>
+        
         <jsp:include page="../header.jsp" />
-        <h1 class="mt-3">Reservation for ${reservation.name}</h1>
-        <div class="container-fluid p-5 d-block">
+        
+        <div id='reservationSumary'>
+            <jsp:include page="reservationInfoPartial.jsp" />
+        </div>
+                        
+        <div class="container custom_container py-4 mb-3">
             <div class="row">
-                <div id="reservation_customer_information" class="col-sm-12 mb-5">
-                    <table class="float-right">
-                        <tr>
-                            <th>Reservation #</th>
-                            <td>${reservation.id}</td>
-                        </tr>
-
-                        <tr>
-                            <th>Name</th>
-                            <td>${reservation.name}</td>
-                        </tr>
-
-                        <tr>
-                            <th>E-mail</th>
-                            <td>${reservation.email}</td>
-                        </tr>
-
-                        <tr>
-                            <th>Reservation Start</th>
-                            <td>${reservation.dateStart.toString()}</td>
-                        </tr>
-
-                        <tr>
-                            <th>Reservation End</th>
-                            <td>${reservation.dateEnd.toString()}</td>
-                        </tr>
-
-                        <tr>
-                            <th>Amount due</th>
-                            <td>${reservation.totalPrice()}</td>
-                        </tr>
-
-                    </table>
+                <div class="col-sm-6">
+                    <button type='button' class="submit-button" onclick="OpenUpdateReservationModal()">
+                        Edit Reservation
+                    </button>
                 </div>
-                <div id="reservation_rooms_information" class="col-sm-12">
-                    <table class="w-100">
-                        <tr>
-                            <th>Room</th>
-                            <th>Description</th>
-                            <th>Price</th>
-                        </tr>
-                        <c:forEach items="${reservation.rooms}" var="room">
-                            <tr>
-                                <td>${room.suite.name}</td>
-                                <td>
-                                    View: ${room.suite.name}<br>
-                                    Floor: ${room.floor}
-                                </td>
-                                <td>${room.roomPrice()} $</td>
-                            </tr>
-                        </c:forEach>
-                        <tr style="height:50px;">
-                            <td colspan="3"></td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <th>Total: </th>
-                            <th>${reservation.totalPrice()} $</th>
-                        </tr>
-                    </table>
+                <div class="col-sm-6">
+                    <button type='button' class="submit-button" onclick='DeleteReservation()'>
+                        Delete Reservation
+                    </button>
+                </div>
+            </div>
+        </div>
+                                        
+        <div class="modal fade bd-example-modal-lg" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                <div class="modal-content">
+                    <div id="modalBody" class="modal-body" style='max-height: 800px;'>
+                        ...
+                    </div>
                 </div>
             </div>
         </div>

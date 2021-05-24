@@ -69,5 +69,16 @@
         <property name="dayServices" ref="dayServices" />
         <property name="seasonServices" ref="seasonServices" />
     </bean>
+    
+    <bean name="adminRoomsController" class="com.hnagano.controllers.AdminRoomsController">
+        <property name="roomServices" ref="roomServices" />
+        <property name="viewServices" ref="viewServices" />
+        <property name="suiteServices" ref="suiteServices" />
+    </bean>
+    
+    <bean name="adminReservationsController" class="com.hnagano.controllers.AdminReservationsController">
+        <property name="reservationServices" ref="reservationServices" />
+        <property name="roomServices" ref="roomServices" />
+    </bean>
 
 </beans>
