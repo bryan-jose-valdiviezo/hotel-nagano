@@ -97,7 +97,13 @@ public class ReservationsController {
     }
     
     @RequestMapping(value="/{id}", method = RequestMethod.GET)
-    public String showReservation(@PathVariable("id") int id, ModelMap model) {
+    public String showReservation(@PathVariable("id") int id, ModelMap model, HttpSession session) {
+        
+        if (session.getAttribute("reservationPermission") != null)
+            session.removeAttribute("reservationPermission");
+        else
+            return "redirect:/";
+        
         Reservation reservation = reservationServices.findReservation(id);
         model.addAttribute("reservation", reservation);
         

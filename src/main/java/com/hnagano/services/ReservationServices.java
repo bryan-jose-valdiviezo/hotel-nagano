@@ -26,6 +26,10 @@ public class ReservationServices {
         return dao.findAll();
     }
     
+    public Reservation findByIdAndEmail(int id, String email) {
+        return dao.findByIdAndEmail(id, email);
+    }
+    
     public ArrayList<Reservation> findAllByFilter(ReservationSearchDTO form) {
         return dao.findAllByFilter(form);
     }

@@ -9,7 +9,7 @@
 <!DOCTYPE html>
 <div class="container custom_container">
     <h2>Look for a reservation</h2>
-    <form:form id="ReservationSeachForm" modelAttribute="reservationSearchDTO">
+    <form:form id="ReservationSeachForm" modelAttribute="reservationSearchDTO" method="post">
         <div class="row">
             <div class="form-group col-lg-6">
                 <form:label path="email">Email</form:label>

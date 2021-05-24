@@ -23,11 +23,11 @@
             <img src="<c:url value="/resources/data/hotel-nagano-giant-logo.png" />" class="mb-2">
         </div>
 
-            <c:if test="${not empty sessionScope.admin}">
+            <c:if test="${not empty sessionScope.user && sessionScope.user.role == 'ADMIN'}">
                 <jsp:include page="partials/reservations/dailyReservationInfoPartial.jsp"/>
             </c:if>
         
-            <c:if test="${empty sessionScope.admin}">
+            <c:if test="${empty sessionScope.user || sessionScope.user.role != 'ADMIN'}">
                 <jsp:include page="partials/reservations/reservationSearchPartial.jsp" />
             </c:if>
     </body>

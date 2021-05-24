@@ -54,21 +54,23 @@
         <div id='reservationSumary'>
             <jsp:include page="reservationInfoPartial.jsp" />
         </div>
-                        
-        <div class="container custom_container py-4 mb-3">
-            <div class="row">
-                <div class="col-sm-6">
-                    <button type='button' class="submit-button" onclick="OpenUpdateReservationModal()">
-                        Edit Reservation
-                    </button>
-                </div>
-                <div class="col-sm-6">
-                    <button type='button' class="submit-button" onclick='DeleteReservation()'>
-                        Delete Reservation
-                    </button>
+               
+        <c:if test="${not empty sessionScope.user && sessionScope.user.role == 'ADMIN'}">
+            <div class="container custom_container py-4 mb-3">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <button type='button' class="submit-button" onclick="OpenUpdateReservationModal()">
+                            Edit Reservation
+                        </button>
+                    </div>
+                    <div class="col-sm-6">
+                        <button type='button' class="submit-button" onclick='DeleteReservation()'>
+                            Delete Reservation
+                        </button>
+                    </div>
                 </div>
             </div>
-        </div>
+        </c:if>
                                         
         <div class="modal fade bd-example-modal-lg" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-lg" role="document">

@@ -52,7 +52,7 @@
     </bean>
 
     <bean name="indexController" class="com.hnagano.controllers.IndexController">
-        
+        <property name="reservationServices" ref="reservationServices" />
     </bean>
 
     <bean name="roomsController" class="com.hnagano.controllers.RoomsController">
