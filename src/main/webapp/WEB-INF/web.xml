@@ -10,11 +10,11 @@
     </context-param>
     <context-param>
         <param-name>pilote</param-name>
-        <param-value>com.mysql.jdbc.Driver</param-value>
+        <param-value>com.mysql.cj.jdbc.Driver</param-value>
     </context-param>
     <context-param>
         <param-name>bdUrl</param-name>
-        <param-value>jdbc:mysql://localhost/hotel_nagano?serverTimezone=UTC</param-value>
+        <param-value>jdbc:mysql://localhost:3306/hotel_nagano?serverTimezone=UTC</param-value>
     </context-param>
     <context-param>
         <param-name>user</param-name>
@@ -22,7 +22,7 @@
     </context-param>
     <context-param>
         <param-name>password</param-name>
-        <param-value/>
+        <param-value>root</param-value>
     </context-param>
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
